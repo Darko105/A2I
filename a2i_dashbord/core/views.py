@@ -8,10 +8,16 @@ def index(request):
         admin = True
     else:
         admin = False
+    
+    if request.user.is_authenticated:
+        name = request.user.username
+        bio = request.user.bio
         
         
     context = {
         'userIsAdmin' : admin,
+        'username' : name,
+        'bio' : bio
     }
     
     return render(request,'core/index.html',context)

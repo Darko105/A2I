@@ -246,7 +246,7 @@ innerLevelItems.forEach((element) => {
             innerMenu.querySelectorAll(":scope .slide.has-sub > a").forEach((el) => {
                 if (
                     el.nextElementSibling &&
-                    el.nextElementSibling ? .style.display === "block"
+                    el.nextElementSibling ? el.style.display === "block"
                 ) {
                     slideUp(el.nextElementSibling);
                 }

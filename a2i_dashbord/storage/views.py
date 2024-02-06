@@ -7,6 +7,10 @@ from django.db.models import Q
 
 def storage_view(request):
     
+    admin = request.session['userIsAdmin'] 
+    name  = request.session['username'] 
+    bio = request.session['bio']
+    
     if request.method == 'POST':
         searched = request.POST['searchProd']
         product = Product.objects.filter(
@@ -17,11 +21,23 @@ def storage_view(request):
     
         context = {
                 'product' : product,
-                'oddEven' :oddEven
+                'oddEven' : oddEven,
+                'name' : name,
+                'admin' : admin,
+                'bio' : bio,
         }
         return render(request,'storage/storage.html',context)
     else:
         product = Product.objects.all()
         return render(request,'storage/storage.html',{'empty':product})
+
+
+
+def edit_view(request,name):
+    print(name)
+    context = {
+        'name' : name,
+    }
+    return render(request,'storage/edit.html',context)
     
     

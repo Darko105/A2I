@@ -9,7 +9,7 @@ def register_view(request):
         form = UserRegisterForm(request.POST or None)
         print(form.data)
         if form.is_valid():
-            print(form.username)
+            form.save()
     else:
         form = UserRegisterForm()
 

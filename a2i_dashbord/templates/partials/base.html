@@ -267,7 +267,7 @@
                      
                            
                     {% if userIsAdmin %}
-                            <li class="slide has-sub">
+                            <li class="slide ">
                                 <a href="/admin" class="side-menu__item">
                                     <i class="bx bx-home side-menu__icon"></i>
                                     <span class="side-menu__label">
@@ -275,8 +275,9 @@
                                     </span>
                                 </a>
                             </li>
+                            <li class="slide__category"><span class="category-name">Pages</span></li>
                     {% else %}
-                    <li class="slide divide-warning/30">
+                    <li class="slide">
                         <a href="/admin/login/" class="side-menu__item color-red">
                             <i class="bx bx-home side-menu__icon"></i>
                             <span class="side-menu__label">
@@ -286,7 +287,7 @@
                     </li> 
                     {% endif %}
 
-                    <li class="slide has-sub">
+                    <li class="slide ">
                         <a href="/storage/" class="side-menu__item">
                             <i class="bx bx-home side-menu__icon"></i>
                             <span class="side-menu__label">

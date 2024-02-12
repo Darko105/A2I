@@ -23,4 +23,4 @@ def index(request):
 
         return redirect('storage:storage')
     else:
-        return redirect('storage:storage')
+        return redirect('userauths:sign-up')

@@ -8,7 +8,7 @@
     <div class="container-div mt-5 mb-3">
         <div class="bg-white dark:bg-black/20 p-7 rounded-lg shadow-md">
             <div class="flex items-center  ">
-                <input type="text" name='searchProd' id="searchInput" placeholder="Search..." class="w-full px-5 py-2 pb-1 dark:bg-black/20 dark:text-white border-solid focus:outline-none text-black ">
+                <input type="text" name="searchProd" id="searchInput" value="{{ search }}" placeholder="Search..." class="w-full px-5 py-2 pb-1 dark:bg-black/20 dark:text-white border-solid focus:outline-none text-black"> 
                 <button  class="ml-4 p-3 bg-black text-white px-6 py-2 rounded-md">Search</button>
             </div>
         </div>
@@ -39,6 +39,11 @@
                     </th>
                     <th class=" p-3">
                         <div class="text-center">
+                            <span><a href="?o=3" class="dark:text-white">Date</a></span>
+                        </div>
+                    </th>
+                    <th class=" p-3">
+                        <div class="text-center">
                             <span><a href="?o=3" class="dark:text-white">Local</a></span>
                         </div>
                     </th>
@@ -48,9 +53,11 @@
                
                 {% for prod in empty%}
                         <tr class="bg-white dark:bg-black/20 dark:text-white">
-                            <td class=" p-2"><a href="{% url 'storage:edit_view' name='name' %}" class="dark:text-white">{{ prod.name }}</a></td>
+                            <td class=" p-2"><a href="{% url 'storage:edit_view' name='name' %}" class="dark:border-gray-500 border-b light:border-black dark:text-white">{{ prod.name }}</a></td>
                             <td class=" p-2"><span class="dark:text-white">{{prod.discription}}</span></td>
+                            <td class=" p-2"><span class="dark:text-white">{{ prod.date }}</span></td>
                             <td class=" p-2"><span class="dark:text-white">{{prod.local}}-{{ prod.position }}</span></td>
+                            
                         </tr>
                 {% endfor %}
                
@@ -76,6 +83,11 @@
                     </th>
                     <th class=" p-3">
                         <div class="text-center">
+                            <span><a href="?o=3" class="dark:text-white">Date</a></span>
+                        </div>
+                    </th>
+                    <th class=" p-3">
+                        <div class="text-center">
                             <span><a href="?o=3" class="dark:text-white">Local</a></span>
                         </div>
                     </th>
@@ -83,25 +95,22 @@
             </thead>
             <tbody class='text-center'>
                
-                {% for prod in product%}
-                
-                    
-                        {% if oddEven|divisibleby:2 %}
+                {% for prod in product %}
+                        {% if forloop.counter|divisibleby:2 %}
                             <tr class="bg-gray-200 dark:bg-black/20 dark:text-white">
-                                <td class=" p-2"><span class="dark:text-white">{{ prod.name }}</span></td>
-                                <td class=" p-2"><span class="dark:text-white">{{prod.discription}}</span></td>
-                                <td class=" p-2"><span class="dark:text-white">{{prod.local}}</span></td>
+                                <td class=" p-2"><a href="{% url 'storage:edit_view' name='name' %}" class="dark:text-white">{{ prod.name }}</a></td>
+                                <td class="p-2"><span class="dark:text-white">{{ prod.discription }}</span></td>
+                                <td class="p-2"><span class="dark:text-white">{{ prod.date }}</span></td>
+                                <td class="p-2"><span class="dark:text-white">{{ prod.local }}</span></td>
                             </tr>
                         {% else %}
                             <tr class="bg-white dark:bg-black/20 dark:text-white">
-                                <td class=" p-2"><span class="dark:text-white">{{ prod.name }}</span></td>
-                                <td class=" p-2"><span class="dark:text-white">{{prod.discription}}</span></td>
-                                <td class=" p-2"><span class="dark:text-white">{{prod.local}}-{{ prod.position }}</span></td>
+                                <td class="p-2"><span class="dark:text-white">{{ prod.name }}</span></td>
+                                <td class="p-2"><span class="dark:text-white">{{ prod.discription }}</span></td>
+                                <td class="p-2"><span class="dark:text-white">{{ prod.date }}</span></td>
+                                <td class="p-2"><span class="dark:text-white">{{ prod.local }}-{{ prod.position }}</span></td>
                             </tr>
                         {% endif %}
-                        
-                                
-                
                 {% endfor %}
                
             </tbody>
@@ -109,15 +118,21 @@
     </div>
 </div>
 
-{% endif %} 
+{% endif %}
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the search input element
+        var searchInput = document.getElementById('searchInput');
 
+        // Focus on the search input
+        searchInput.focus();
 
-
-
-
-
-
+        // Keep the cursor at the end of the input value
+        var length = searchInput.value.length;
+        searchInput.setSelectionRange(length, length);
+    });
+</script>
 
 
 {% endblock content %}
